@@ -1,41 +1,34 @@
 package pl.konradek.footballteam.service;
 
-import org.springframework.stereotype.Service;
-import pl.konradek.footballteam.datasource.Datasource;
+import org.springframework.stereotype.Repository;
 import pl.konradek.footballteam.model.Player;
+import pl.konradek.footballteam.repository.PlayerRepository;
 
 import java.util.List;
 
-@Service
+@Repository
 public class PlayerServiceImpl implements PlayerService {
 
-    private final Datasource datasource;
+    private final PlayerRepository playerRepository;
 
-    public PlayerServiceImpl(Datasource datasource) {
-        this.datasource = datasource;
-    }
-
-    @Override
-    public List<Player> getPlayers() {
-        return datasource.getPlayers();
+    public PlayerServiceImpl(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
     }
 
 
-    @Override
-    public Player getPlayerById(Integer id) {
-        try {
-            return datasource.getPlayerById(id);
-        }catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-        }
-
-        return null;
+    public Player findById(Integer playerID) {
+        return playerRepository.findById(playerID).orElse(null);
     }
 
-    @Override
-    public void addPlayer(Player player) {
-        datasource.addPlayer(player);
+    public List<Player> findAll() {
+        return playerRepository.findAll();
     }
 
+    public Player getById(Integer playerId) {
+        return playerRepository.getById(playerId);
+    }
 
+    public void save(Player player) {
+        playerRepository.save(player);
+    }
 }

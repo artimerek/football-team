@@ -1,46 +1,52 @@
 package pl.konradek.footballteam.service;
 
 import org.springframework.stereotype.Service;
-import pl.konradek.footballteam.datasource.Datasource;
+import pl.konradek.footballteam.model.Player;
 import pl.konradek.footballteam.model.Team;
+import pl.konradek.footballteam.repository.PlayerRepository;
+import pl.konradek.footballteam.repository.TeamRepository;
 
 import java.util.List;
 
 @Service
 public class TeamServiceImpl implements TeamService {
 
-    private final Datasource datasource;
+    private final PlayerRepository playerRepository;
+    private final TeamRepository teamRepository;
 
-    public TeamServiceImpl(Datasource datasource) {
-        this.datasource = datasource;
+    public TeamServiceImpl(PlayerRepository playerRepository, TeamRepository teamRepository) {
+        this.playerRepository = playerRepository;
+        this.teamRepository = teamRepository;
     }
 
-    @Override
-    public List<Team> getTeams() {
-        return datasource.getTeams();
-    }
+    public void addPlayerToTeam(int playerId, int teamId){
+        Team team = teamRepository.getById(teamId);
+        Player player = playerRepository.getById(playerId);
 
-    @Override
-    public Team getTeamById(Integer id) {
-        try {
-            return datasource.getTeamById(id);
-        }catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
+        Team oldTeam = player.getTeam();
+
+        if(oldTeam != null) {
+            oldTeam.removePlayer(player);
         }
-        return null;
+
+        player.setTeam(team);
+        playerRepository.save(player);
+
     }
 
-    @Override
-    public void addTeam(Team team) {
-        datasource.addTeam(team);
+    public List<Team> findAll(){
+        return teamRepository.findAll();
     }
 
-    @Override
-    public void addPlayerToTeam(Integer playerId, Integer teamId) {
-        try {
-            datasource.addPlayerToTeam(playerId, teamId);
-        }catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-        }
+    public Team getById(Integer teamId) {
+        return teamRepository.getById(teamId);
+    }
+
+    public void save(Team team) {
+        teamRepository.save(team);
+    }
+
+    public Team findById(Integer teamID) {
+        return teamRepository.findById(teamID).orElse(null);
     }
 }
