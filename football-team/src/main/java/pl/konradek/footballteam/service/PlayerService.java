@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface PlayerService {
 
-    List<Player> getPlayers();
+     Player findById(Integer playerID);
 
-    Player getPlayerById(Integer id);
+     List<Player> findAll();
 
-    void addPlayer(Player player);
+     Player getById(Integer playerId);
+
+     void save(Player player);
 }

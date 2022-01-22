@@ -1,21 +1,22 @@
 package pl.konradek.footballteam.model;
 
+import javax.persistence.*;
 
-
-import org.springframework.stereotype.Component;
-
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-
+@Entity
 public class Player {
-    private Integer id;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private Integer ovrl;
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
 
-    public Player(Integer id, Integer ovrl, String name) {
-        this.id = id;
+
+    public Player(Integer ovrl, String name) {
         this.ovrl = ovrl;
         this.name = name;
     }
@@ -47,12 +48,21 @@ public class Player {
         this.name = name;
     }
 
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
                 "id=" + id +
                 ", ovrl=" + ovrl +
                 ", name='" + name + '\'' +
+                ", team=" + team +
                 '}';
     }
 }

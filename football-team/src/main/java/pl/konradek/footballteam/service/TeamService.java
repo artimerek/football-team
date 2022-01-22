@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface TeamService {
 
-    List<Team> getTeams();
+     void addPlayerToTeam(int playerId, int teamId);
 
-    Team getTeamById(Integer id);
+    List<Team> findAll();
 
-    void addTeam(Team team);
+    Team getById(Integer teamId);
 
-    void addPlayerToTeam(Integer playerId, Integer teamId);
+    void save(Team team);
 
-
+    Team findById(Integer teamID);
 }

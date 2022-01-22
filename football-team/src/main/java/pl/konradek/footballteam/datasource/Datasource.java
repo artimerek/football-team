@@ -17,37 +17,7 @@ public class Datasource {
 
 
     public Datasource() {
-        this.players.add(new Player(playersID++, 85, "Waldemar"));
-        this.players.add(new Player(playersID++, 69, "Szymon"));
-        this.players.add(new Player(playersID++, 92, "Edward"));
-        this.players.add(new Player(playersID++, 53, "Krzysztof"));
-        this.players.add(new Player(playersID++, 73, "Materac"));
-        this.players.add(new Player(playersID++, 43, "Banderola"));
-        this.players.add(new Player(playersID++, 87, "Andrzej"));
-        this.players.add(new Player(playersID++, 67, "Zbychu"));
-        this.players.add(new Player(playersID++, 83, "Kamil"));
 
-        Team team = new Team(teamsID++, "Free agents");
-
-
-        Team team1 = new Team(teamsID++, "FC Ponalewce");
-
-        team1.addPlayer(players.get(0));
-        team1.addPlayer(players.get(1));
-        team1.addPlayer(players.get(2));
-        team1.addPlayer(players.get(3));
-
-        Team team2 = new Team(teamsID++, "Odra Opole");
-
-        team2.addPlayer(players.get(4));
-        team2.addPlayer(players.get(5));
-        team2.addPlayer(players.get(6));
-        team2.addPlayer(players.get(7));
-        team2.addPlayer(players.get(8));
-
-        teams.add(team);
-        teams.add(team1);
-        teams.add(team2);
     }
 
 

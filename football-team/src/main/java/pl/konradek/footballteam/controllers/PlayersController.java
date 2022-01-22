@@ -3,34 +3,36 @@ package pl.konradek.footballteam.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.konradek.footballteam.datasource.Datasource;
 import pl.konradek.footballteam.model.Player;
 import pl.konradek.footballteam.service.PlayerService;
+import pl.konradek.footballteam.service.impl.PlayerServiceImpl;
 import pl.konradek.footballteam.service.TeamService;
+import pl.konradek.footballteam.service.impl.TeamServiceImpl;
 
 
 @Controller
 @RequestMapping("/players")
 public class PlayersController {
 
+
     private final PlayerService playerService;
+
     private final TeamService teamService;
 
-    public PlayersController(PlayerService playerService, TeamService teamService) {
+    public PlayersController(PlayerServiceImpl playerService, TeamServiceImpl teamService) {
         this.playerService = playerService;
         this.teamService = teamService;
     }
 
-
     @GetMapping("/all")
     public String getPlayers(Model model) {
-        model.addAttribute("players", playerService.getPlayers());
+        model.addAttribute("players", playerService.findAll());
         return "players";
     }
 
     @GetMapping("/player/{playerId}")
     public String getPlayerById(@PathVariable Integer playerId, Model model) {
-        model.addAttribute("player", playerService.getPlayerById(playerId));
+        model.addAttribute("player", playerService.getById(playerId));
         return "player";
     }
 
@@ -42,23 +44,21 @@ public class PlayersController {
     }
 
     @PostMapping("/create-form")
-    public String playerForm(@ModelAttribute Player player, Model model) {
+    public String playerForm(@ModelAttribute Player player) {
 
         if(player.getName().length() < 1) {
             System.out.println("Name is too short");
             return "transferResultFalse";
         }
 
-
         if(player.getOvrl() < 1|| player.getOvrl() > 99){
             System.out.println("Wrong ovrl given");
             return "transferResultFalse";
         }
 
-        model.addAttribute("player", player);
-        player.setId(Datasource.playersID++);
-        playerService.addPlayer(player);
-        teamService.addPlayerToTeam(player.getId(), 0);
+        player.setTeam(teamService.getById(1));
+        playerService.save(player);
+
         return "result-player";
     }
 }

@@ -3,12 +3,13 @@ package pl.konradek.footballteam.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.konradek.footballteam.datasource.Datasource;
 import pl.konradek.footballteam.model.Helper;
 import pl.konradek.footballteam.model.Player;
 import pl.konradek.footballteam.model.Team;
 import pl.konradek.footballteam.service.PlayerService;
+import pl.konradek.footballteam.service.impl.PlayerServiceImpl;
 import pl.konradek.footballteam.service.TeamService;
+import pl.konradek.footballteam.service.impl.TeamServiceImpl;
 
 import javax.validation.Valid;
 
@@ -19,21 +20,21 @@ public class TeamsController {
     private final TeamService teamService;
     private final PlayerService playerService;
 
-    public TeamsController(TeamService teamService, PlayerService playerService) {
+
+    public TeamsController(TeamServiceImpl teamService, PlayerServiceImpl playerService) {
         this.teamService = teamService;
         this.playerService = playerService;
     }
 
-
     @GetMapping("/all")
     public String getTeams(Model model) {
-        model.addAttribute("teams", teamService.getTeams());
+        model.addAttribute("teams", teamService.findAll());
         return "teams";
     }
 
     @GetMapping("/team/{teamId}")
     public String getTeamById(@PathVariable Integer teamId, Model model) {
-        model.addAttribute("team", teamService.getTeamById(teamId));
+        model.addAttribute("team", teamService.getById(teamId));
         return "team";
     }
 
@@ -52,8 +53,7 @@ public class TeamsController {
         }
 
         model.addAttribute("team", team);
-        team.setId(Datasource.teamsID++);
-        teamService.addTeam(team);
+        teamService.save(team);
         return "result";
     }
 
@@ -67,15 +67,16 @@ public class TeamsController {
 
     @PostMapping("/team/addPlayer")
     public String addPlayerToTheTeam(@Valid @ModelAttribute Helper helper, Model model) {
-        teamService.addPlayerToTeam(helper.getPlayerID(), helper.getTeamID());
 
-        Player player = playerService.getPlayerById(helper.getPlayerID());
-        Team team = teamService.getTeamById(helper.getTeamID());
-
+        Player player = playerService.findById(helper.getPlayerID());
+        Team team = teamService.findById(helper.getTeamID());
 
         if(player == null || team == null){
             return "transferResultFalse";
         }
+
+        teamService.addPlayerToTeam(player.getId(), team.getId());
+
 
         model.addAttribute("player", player);
         model.addAttribute("team", team);
