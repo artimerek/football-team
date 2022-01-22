@@ -1,10 +1,11 @@
-package pl.konradek.footballteam.service;
+package pl.konradek.footballteam.service.impl;
 
 import org.springframework.stereotype.Service;
 import pl.konradek.footballteam.model.Player;
 import pl.konradek.footballteam.model.Team;
 import pl.konradek.footballteam.repository.PlayerRepository;
 import pl.konradek.footballteam.repository.TeamRepository;
+import pl.konradek.footballteam.service.TeamService;
 
 import java.util.List;
 

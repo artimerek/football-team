@@ -5,8 +5,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import pl.konradek.footballteam.model.Player;
 import pl.konradek.footballteam.model.Team;
-import pl.konradek.footballteam.service.PlayerServiceImpl;
-import pl.konradek.footballteam.service.TeamServiceImpl;
+import pl.konradek.footballteam.service.impl.PlayerServiceImpl;
+import pl.konradek.footballteam.service.impl.TeamServiceImpl;
 
 @Component
 public class DataLoader implements ApplicationRunner {

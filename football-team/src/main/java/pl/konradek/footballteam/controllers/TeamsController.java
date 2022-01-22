@@ -7,9 +7,9 @@ import pl.konradek.footballteam.model.Helper;
 import pl.konradek.footballteam.model.Player;
 import pl.konradek.footballteam.model.Team;
 import pl.konradek.footballteam.service.PlayerService;
-import pl.konradek.footballteam.service.PlayerServiceImpl;
+import pl.konradek.footballteam.service.impl.PlayerServiceImpl;
 import pl.konradek.footballteam.service.TeamService;
-import pl.konradek.footballteam.service.TeamServiceImpl;
+import pl.konradek.footballteam.service.impl.TeamServiceImpl;
 
 import javax.validation.Valid;
 
