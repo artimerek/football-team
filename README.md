@@ -2,7 +2,7 @@
 1. git clone https://github.com/artimerek/wszib_task.git
 2. Przy pomocy intelij aplikacja powinna się uruchomić. Adres: http://localhost:8070/
 
-3.Baza danych:
+Baza danych:
 
 Dostęp do bazy danych pod adresem:
   http://localhost:8070/h2-console
