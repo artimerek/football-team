@@ -1,5 +1,6 @@
 package pl.konradek.footballteam.service.impl;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.konradek.footballteam.model.Player;
 import pl.konradek.footballteam.model.Team;
@@ -9,16 +10,13 @@ import pl.konradek.footballteam.service.TeamService;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class TeamServiceImpl implements TeamService {
 
     private final PlayerRepository playerRepository;
     private final TeamRepository teamRepository;
 
-    public TeamServiceImpl(PlayerRepository playerRepository, TeamRepository teamRepository) {
-        this.playerRepository = playerRepository;
-        this.teamRepository = teamRepository;
-    }
 
     public void addPlayerToTeam(int playerId, int teamId){
         Team team = teamRepository.getById(teamId);

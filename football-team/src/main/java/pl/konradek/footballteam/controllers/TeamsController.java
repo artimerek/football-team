@@ -1,5 +1,6 @@
 package pl.konradek.footballteam.controllers;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,16 +16,11 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/teams")
+@AllArgsConstructor
 public class TeamsController {
 
     private final TeamService teamService;
     private final PlayerService playerService;
-
-
-    public TeamsController(TeamServiceImpl teamService, PlayerServiceImpl playerService) {
-        this.teamService = teamService;
-        this.playerService = playerService;
-    }
 
     @GetMapping("/all")
     public String getTeams(Model model) {

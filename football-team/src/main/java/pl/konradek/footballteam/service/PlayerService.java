@@ -13,4 +13,6 @@ public interface PlayerService {
      Player getById(Integer playerId);
 
      void save(Player player);
+
+     void deleteById(Integer playerId);
 }

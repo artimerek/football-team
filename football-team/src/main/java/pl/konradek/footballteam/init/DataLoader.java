@@ -11,14 +11,13 @@ import pl.konradek.footballteam.service.impl.TeamServiceImpl;
 @Component
 public class DataLoader implements ApplicationRunner {
 
-    private TeamServiceImpl teamService;
-    private PlayerServiceImpl playerService;
+    private final TeamServiceImpl teamService;
+    private final PlayerServiceImpl playerService;
 
     public DataLoader(TeamServiceImpl teamService, PlayerServiceImpl playerService) {
         this.teamService = teamService;
         this.playerService = playerService;
     }
-
 
 
     public void run(ApplicationArguments args) {
