@@ -2,7 +2,7 @@ package pl.konradek.footballteam.rest;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import pl.konradek.footballteam.converters.DtoConverter;
+import pl.konradek.footballteam.converters.PlayerDtoConverter;
 import pl.konradek.footballteam.dto.PlayerDto;
 import pl.konradek.footballteam.model.Player;
 import pl.konradek.footballteam.service.PlayerService;
@@ -16,19 +16,19 @@ public class RestPlayersController {
 
     private final PlayerService playerService;
     private final TeamService teamService;
-    private final DtoConverter dtoConverter;
+    private final PlayerDtoConverter dtoConverter;
 
 
     @GetMapping("/players")
     List<PlayerDto> findAll() {
         List<Player> players = playerService.findAll();
-        return dtoConverter.playerToDto(players);
+        return dtoConverter.entityToDto(players);
     }
 
     @GetMapping("/players/{id}")
     public PlayerDto getPlayer(@PathVariable int id){
         Player player = playerService.findById(id);
-        return dtoConverter.playerToDto(player);
+        return dtoConverter.entityToDto(player);
     }
 
     @PostMapping("/players")
@@ -37,7 +37,7 @@ public class RestPlayersController {
         player1.setTeam(teamService.getById(1));
         playerService.save(player1);
 
-        return dtoConverter.playerToDto(player);
+        return dtoConverter.entityToDto(player1);
     }
 
     @DeleteMapping("/players/{id}")

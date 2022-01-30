@@ -1,6 +1,6 @@
 package pl.konradek.footballteam.converters;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.konradek.footballteam.dto.PlayerDto;
 import pl.konradek.footballteam.model.Player;
@@ -9,13 +9,13 @@ import pl.konradek.footballteam.service.TeamService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Component
-@AllArgsConstructor
-public class DtoConverter {
+public class PlayerDtoConverter {
 
     private final TeamService teamService;
 
-    public PlayerDto playerToDto(Player player){
+    public PlayerDto entityToDto(Player player) {
         PlayerDto playerDto = new PlayerDto();
         playerDto.setId(player.getId());
         playerDto.setName(player.getName());
@@ -24,7 +24,7 @@ public class DtoConverter {
         return playerDto;
     }
 
-    public Player dtoToPlayer(PlayerDto playerDto){
+    public Player dtoToEntity(PlayerDto playerDto) {
         Player player = new Player();
         player.setId(playerDto.getId());
         player.setName(playerDto.getName());
@@ -33,16 +33,15 @@ public class DtoConverter {
         return player;
     }
 
-    public List<PlayerDto> playerToDto(List<Player> players){
-        return players.stream()
-                .map(this::playerToDto)
+    public List<PlayerDto> entityToDto(List<Player> list) {
+        return list.stream()
+                .map(this::entityToDto)
                 .collect(Collectors.toList());
     }
 
-    public List<Player> dtoToPlayer(List<PlayerDto> players){
-        return players.stream()
-                .map(this::dtoToPlayer)
+    public List<Player> dtoToEntity(List<PlayerDto> list) {
+        return list.stream()
+                .map(this::dtoToEntity)
                 .collect(Collectors.toList());
     }
-
 }

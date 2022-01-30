@@ -6,10 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.konradek.footballteam.model.Player;
 import pl.konradek.footballteam.service.PlayerService;
-import pl.konradek.footballteam.service.impl.PlayerServiceImpl;
 import pl.konradek.footballteam.service.TeamService;
-import pl.konradek.footballteam.service.impl.TeamServiceImpl;
-
 
 @Controller
 @RequestMapping("/players")

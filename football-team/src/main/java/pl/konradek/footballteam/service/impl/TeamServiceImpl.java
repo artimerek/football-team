@@ -48,4 +48,9 @@ public class TeamServiceImpl implements TeamService {
     public Team findById(Integer teamID) {
         return teamRepository.findById(teamID).orElse(null);
     }
+
+    @Override
+    public void deleteById(Integer teamId) {
+        teamRepository.deleteById(teamId);
+    }
 }
