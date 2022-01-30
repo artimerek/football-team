@@ -15,4 +15,6 @@ public interface TeamService {
     void save(Team team);
 
     Team findById(Integer teamID);
+
+    void deleteById(Integer teamId);
 }

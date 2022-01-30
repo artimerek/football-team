@@ -12,14 +12,9 @@ public class Datasource {
     private final List<Player> players = new ArrayList<>();
     private final List<Team> teams = new ArrayList<>();
 
-    public static Integer playersID = 0;
-    public static Integer teamsID = 0;
-
-
     public Datasource() {
 
     }
-
 
     public Player getPlayerById(int playerId) {
         if(!checkPlayer(playerId)){

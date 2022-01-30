@@ -1,28 +1,21 @@
 package pl.konradek.footballteam.controllers;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.konradek.footballteam.model.Player;
 import pl.konradek.footballteam.service.PlayerService;
-import pl.konradek.footballteam.service.impl.PlayerServiceImpl;
 import pl.konradek.footballteam.service.TeamService;
-import pl.konradek.footballteam.service.impl.TeamServiceImpl;
-
 
 @Controller
 @RequestMapping("/players")
+@AllArgsConstructor
 public class PlayersController {
 
-
     private final PlayerService playerService;
-
     private final TeamService teamService;
 
-    public PlayersController(PlayerServiceImpl playerService, TeamServiceImpl teamService) {
-        this.playerService = playerService;
-        this.teamService = teamService;
-    }
 
     @GetMapping("/all")
     public String getPlayers(Model model) {
